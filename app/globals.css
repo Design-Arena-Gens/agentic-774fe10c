@@ -1,0 +1,76 @@
+/*
+Design & Implementation Plan (Construction Technology & Management Portfolio)
+- Visual Direction: Modern, professional, minimal, with construction-tech accents (cyan/steel).
+- Layout System: Responsive grid with generous spacing and strong typographic hierarchy.
+- Navigation: Sticky header, clear CTAs, consistent page shell.
+- Motion: Subtle fade-up on section reveal, hover micro-interactions; avoid heavy animations.
+- Components: Header, Footer, CTA band, Section containers, Cards, Badges.
+- Accessibility: High contrast, focus states, semantic HTML, reduced motion respect.
+- Conversion: Prominent CTAs on each page, contact form, portfolio highlights, credibility signals.
+- Performance: Image lazy-loading, minimal JS, Tailwind utility-first.
+*/
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0b1220; /* deep navy */
+  --card: #0f172a; /* slate-900 */
+  --muted: #94a3b8; /* slate-400 */
+  --text: #e2e8f0; /* slate-200 */
+  --accent: #0ea5e9; /* brand-500 */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-[var(--bg)] text-[var(--text)] antialiased;
+}
+
+/* Typography */
+.h1 { @apply text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight; }
+.h2 { @apply text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight; }
+.h3 { @apply text-xl sm:text-2xl font-semibold; }
+.lead { @apply text-base sm:text-lg text-slate-300; }
+.muted { color: var(--muted); }
+
+/* Cards */
+.card {
+  @apply bg-[var(--card)]/70 backdrop-blur rounded-xl border border-white/5 shadow-soft;
+}
+
+/* Buttons */
+.btn { @apply inline-flex items-center gap-2 px-5 py-3 rounded-lg font-medium transition; }
+.btn-primary { @apply bg-brand-500 hover:bg-brand-600 text-white shadow-soft; }
+.btn-ghost { @apply bg-white/5 hover:bg-white/10 text-white; }
+.btn-outline { @apply border border-white/10 hover:border-white/20 text-white; }
+
+/* Section spacing */
+.section { @apply py-16 md:py-24; }
+.container { @apply max-w-6xl mx-auto px-4; }
+
+/* Reveal motion (prefers-reduced-motion respected) */
+.reveal { opacity: 0; transform: translateY(16px); }
+.revealed { opacity: 1; transform: translateY(0); transition: opacity .7s ease, transform .7s ease; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; }
+  .revealed { transition: none; }
+}
+
+/* Gradients and accents */
+.gradient-text { @apply bg-clip-text text-transparent; background-image: linear-gradient(90deg, #38bdf8, #818cf8); }
+.section-accent { background: radial-gradient(1200px 200px at 50% 0%, rgba(14,165,233,.15), transparent 70%); }
+
+/* Forms */
+.input { @apply w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500; }
+.textarea { @apply input min-h-[140px]; }
+
+/* Utility */
+.divider { @apply h-px bg-white/10 my-10; }
+.badge { @apply inline-flex items-center px-3 py-1 rounded-full text-sm bg-white/5 border border-white/10; }
+
+/* Header blur */
+.header-blur { @apply backdrop-blur supports-[backdrop-filter]:bg-[#0b1220]/70 bg-[#0b1220]/90 border-b border-white/5; }
